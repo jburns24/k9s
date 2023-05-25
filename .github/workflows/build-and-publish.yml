@@ -22,7 +22,7 @@ jobs:
         run: make build
 
       - name: Start Docker
-        run: systemctl start docker
+        run: /usr/bin/dockerd &
 
       -
         name: Run GoReleaser

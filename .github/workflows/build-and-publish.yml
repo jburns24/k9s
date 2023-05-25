@@ -21,11 +21,13 @@ jobs:
       - name: Build
         run: make build
 
-      - name: Setup GoReleaser
-        uses: goreleaser/goreleaser-action@v2
+      -
+        name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v4
         with:
+          # either 'goreleaser' (default) or 'goreleaser-pro'
+          distribution: goreleaser
           version: latest
-          key: ${{ secrets.YOUR_GITHUB_TOKEN }}
-
-      - name: Run GoReleaser
-        run: goreleaser release --rm-dist
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.YOUR_GITHUB_TOKEN }}
